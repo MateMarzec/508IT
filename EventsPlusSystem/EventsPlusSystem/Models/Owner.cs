@@ -11,12 +11,12 @@ namespace EventsPlusSystem.Models
     {
         public int ID { get; set; }
         [Required]
-        [StringLength(50, MinimumLength = 10, ErrorMessage = "First name cannot be longer than 50 or shorter than 2 characters.")]
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "First name cannot be longer than 25 or shorter than 2 characters.")]
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
-        [StringLength(50, MinimumLength = 10, ErrorMessage = "Last name cannot be longer than 50 or shorter than 2 characters.")]
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "Last name cannot be longer than 25 or shorter than 2 characters.")]
         [Column("LastName")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }

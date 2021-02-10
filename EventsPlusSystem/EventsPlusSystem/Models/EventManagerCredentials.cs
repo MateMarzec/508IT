@@ -21,7 +21,7 @@ namespace EventsPlusSystem.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
         [Required]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Email cannot be longer than 50 or shorter than 5 characters.")]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage ="Please enter valid email.")]
         [Column("Email")]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -16,12 +16,12 @@ namespace EventsPlusSystem.Models
         [Display(Name = "Event Location Name")]
         public string EventLocationName { get; set; }
         [Required]
-        [StringLength(8, MinimumLength = 6, ErrorMessage = "Post code cannot be longer than 8 or shorter than 6 characters.")]
+        [StringLength(10, MinimumLength = 3, ErrorMessage = "Post code cannot be longer than 10 or shorter than 3 characters.")]
         [Column("PostCode")]
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
         [Required]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Address cannot be longer than 50 or shorter than 5 characters.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Address cannot be longer than 50 or shorter than 2 characters.")]
         [Column("Address")]
         [Display(Name = "Address")]
         public string Address { get; set; }

@@ -15,6 +15,7 @@ namespace EventsPlusSystem.Models
         [Display(Name = "Name")]
         public string Name { get; set; }
         [Required]
+        [Range(0,1000000,ErrorMessage ="Please enter the number between 0 to 1000000.")]
         [Column("MaximumNumberofParticipants")]
         [Display(Name = "Maximum Number of Participants")]
         public int Type { get; set; }

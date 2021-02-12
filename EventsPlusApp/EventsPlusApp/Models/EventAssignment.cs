@@ -7,10 +7,10 @@ namespace EventsPlusApp.Models
 {
     public class EventAssignment
     {
-        public int EventManagerID { get; set; }
+        public int ManagerID { get; set; }
         public int EventID { get; set; }
 
-        public EventManager EventManager { get; set; }
+        public Manager Manager { get; set; }
         public Event Event { get; set; }
     }
 }

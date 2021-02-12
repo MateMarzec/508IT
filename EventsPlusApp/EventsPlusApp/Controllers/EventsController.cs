@@ -22,7 +22,8 @@ namespace EventsPlusApp.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Events.ToListAsync());
+            var applicationDbContext = _context.Events.Include(l => l.Location);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -34,7 +35,8 @@ namespace EventsPlusApp.Controllers
             }
 
             var @event = await _context.Events
-                .FirstOrDefaultAsync(m => m.EventID == id);
+                .Include(l => l.Location)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace EventsPlusApp.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
+            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventID,Title,Type,DateAndTime,LocationID")] Event @event)
+        public async Task<IActionResult> Create([Bind("ID,Title,Type,DateAndTime,LocationID")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace EventsPlusApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             return View(@event);
         }
 
@@ -78,6 +82,7 @@ namespace EventsPlusApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             return View(@event);
         }
 
@@ -86,9 +91,9 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventID,Title,Type,DateAndTime,LocationID")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Type,DateAndTime,LocationID")] Event @event)
         {
-            if (id != @event.EventID)
+            if (id != @event.ID)
             {
                 return NotFound();
             }
@@ -102,7 +107,7 @@ namespace EventsPlusApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.EventID))
+                    if (!EventExists(@event.ID))
                     {
                         return NotFound();
                     }
@@ -113,6 +118,7 @@ namespace EventsPlusApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             return View(@event);
         }
 
@@ -125,7 +131,8 @@ namespace EventsPlusApp.Controllers
             }
 
             var @event = await _context.Events
-                .FirstOrDefaultAsync(m => m.EventID == id);
+                .Include(l => l.Location)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {
                 return NotFound();
@@ -147,7 +154,7 @@ namespace EventsPlusApp.Controllers
 
         private bool EventExists(int id)
         {
-            return _context.Events.Any(e => e.EventID == id);
+            return _context.Events.Any(e => e.ID == id);
         }
     }
 }

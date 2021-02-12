@@ -22,7 +22,7 @@ namespace EventsPlusApp.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Bookings.Include(b => b.Event).Include(b => b.EventParticipant);
+            var applicationDbContext = _context.Bookings.Include(b => b.Event).Include(b => b.Participant);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,8 +36,8 @@ namespace EventsPlusApp.Controllers
 
             var booking = await _context.Bookings
                 .Include(b => b.Event)
-                .Include(b => b.EventParticipant)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(b => b.Participant)
+                .FirstOrDefaultAsync(m => m.ParticipantID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -49,8 +49,8 @@ namespace EventsPlusApp.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title");
-            ViewData["EventParticipantID"] = new SelectList(_context.EventParticipants, "ID", "FirstName");
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title");
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,EventParticipantID,EventID")] Booking booking)
+        public async Task<IActionResult> Create([Bind("ParticipantID,EventID")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace EventsPlusApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", booking.EventID);
-            ViewData["EventParticipantID"] = new SelectList(_context.EventParticipants, "ID", "FirstName", booking.EventParticipantID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", booking.EventID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", booking.ParticipantID);
             return View(booking);
         }
 
@@ -85,8 +85,8 @@ namespace EventsPlusApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", booking.EventID);
-            ViewData["EventParticipantID"] = new SelectList(_context.EventParticipants, "ID", "FirstName", booking.EventParticipantID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", booking.EventID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", booking.ParticipantID);
             return View(booking);
         }
 
@@ -95,9 +95,9 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,EventParticipantID,EventID")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("ParticipantID,EventID")] Booking booking)
         {
-            if (id != booking.ID)
+            if (id != booking.ParticipantID)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace EventsPlusApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookingExists(booking.ID))
+                    if (!BookingExists(booking.ParticipantID))
                     {
                         return NotFound();
                     }
@@ -122,8 +122,8 @@ namespace EventsPlusApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", booking.EventID);
-            ViewData["EventParticipantID"] = new SelectList(_context.EventParticipants, "ID", "FirstName", booking.EventParticipantID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", booking.EventID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", booking.ParticipantID);
             return View(booking);
         }
 
@@ -137,8 +137,8 @@ namespace EventsPlusApp.Controllers
 
             var booking = await _context.Bookings
                 .Include(b => b.Event)
-                .Include(b => b.EventParticipant)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(b => b.Participant)
+                .FirstOrDefaultAsync(m => m.ParticipantID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -160,7 +160,7 @@ namespace EventsPlusApp.Controllers
 
         private bool BookingExists(int id)
         {
-            return _context.Bookings.Any(e => e.ID == id);
+            return _context.Bookings.Any(e => e.ParticipantID == id);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace EventsPlusApp.Controllers
         // GET: EventAssignments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.EventAssignments.Include(e => e.Event).Include(e => e.EventManager);
+            var applicationDbContext = _context.EventAssignments.Include(e => e.Event).Include(e => e.Manager);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,8 +36,8 @@ namespace EventsPlusApp.Controllers
 
             var eventAssignment = await _context.EventAssignments
                 .Include(e => e.Event)
-                .Include(e => e.EventManager)
-                .FirstOrDefaultAsync(m => m.EventManagerID == id);
+                .Include(e => e.Manager)
+                .FirstOrDefaultAsync(m => m.ManagerID == id);
             if (eventAssignment == null)
             {
                 return NotFound();
@@ -49,8 +49,8 @@ namespace EventsPlusApp.Controllers
         // GET: EventAssignments/Create
         public IActionResult Create()
         {
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title");
-            ViewData["EventManagerID"] = new SelectList(_context.EventManagers, "ID", "FirstName");
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title");
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventManagerID,EventID")] EventAssignment eventAssignment)
+        public async Task<IActionResult> Create([Bind("ManagerID,EventID")] EventAssignment eventAssignment)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace EventsPlusApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", eventAssignment.EventID);
-            ViewData["EventManagerID"] = new SelectList(_context.EventManagers, "ID", "FirstName", eventAssignment.EventManagerID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", eventAssignment.EventID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", eventAssignment.ManagerID);
             return View(eventAssignment);
         }
 
@@ -85,8 +85,8 @@ namespace EventsPlusApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", eventAssignment.EventID);
-            ViewData["EventManagerID"] = new SelectList(_context.EventManagers, "ID", "FirstName", eventAssignment.EventManagerID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", eventAssignment.EventID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", eventAssignment.ManagerID);
             return View(eventAssignment);
         }
 
@@ -95,9 +95,9 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventManagerID,EventID")] EventAssignment eventAssignment)
+        public async Task<IActionResult> Edit(int id, [Bind("ManagerID,EventID")] EventAssignment eventAssignment)
         {
-            if (id != eventAssignment.EventManagerID)
+            if (id != eventAssignment.ManagerID)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace EventsPlusApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventAssignmentExists(eventAssignment.EventManagerID))
+                    if (!EventAssignmentExists(eventAssignment.ManagerID))
                     {
                         return NotFound();
                     }
@@ -122,8 +122,8 @@ namespace EventsPlusApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventID"] = new SelectList(_context.Events, "EventID", "Title", eventAssignment.EventID);
-            ViewData["EventManagerID"] = new SelectList(_context.EventManagers, "ID", "FirstName", eventAssignment.EventManagerID);
+            ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", eventAssignment.EventID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", eventAssignment.ManagerID);
             return View(eventAssignment);
         }
 
@@ -137,8 +137,8 @@ namespace EventsPlusApp.Controllers
 
             var eventAssignment = await _context.EventAssignments
                 .Include(e => e.Event)
-                .Include(e => e.EventManager)
-                .FirstOrDefaultAsync(m => m.EventManagerID == id);
+                .Include(e => e.Manager)
+                .FirstOrDefaultAsync(m => m.ManagerID == id);
             if (eventAssignment == null)
             {
                 return NotFound();
@@ -160,7 +160,7 @@ namespace EventsPlusApp.Controllers
 
         private bool EventAssignmentExists(int id)
         {
-            return _context.EventAssignments.Any(e => e.EventManagerID == id);
+            return _context.EventAssignments.Any(e => e.ManagerID == id);
         }
     }
 }

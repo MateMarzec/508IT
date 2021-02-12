@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EventManager)
+                @Html.DisplayNameFor(model => model.Manager)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event)
@@ -25,7 +25,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EventManager.FirstName)
+                @Html.DisplayFor(modelItem => item.Manager.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Event.Title)

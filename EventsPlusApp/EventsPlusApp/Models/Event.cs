@@ -10,7 +10,7 @@ namespace EventsPlusApp.Models
     public class Event
     {
         [Key]
-        public int EventID { get; set; }
+        public int ID { get; set; }
         [Required]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "Event title cannot be longer than 20 or shorter than 1 characters.")]
         [Column("Title")]
@@ -27,7 +27,7 @@ namespace EventsPlusApp.Models
         [Display(Name = "Start Date")]
         public DateTime DateAndTime { get; set; }
         public int LocationID { get; set; }
-        public EventLocation EventLocation { get; set; }
+        public Location Location { get; set; }
         public ICollection<EventAssignment> EventAssignments { get; set; }
         public ICollection<Booking> Bookings { get; set; }
     }

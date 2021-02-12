@@ -16,34 +16,23 @@ namespace EventsPlusApp.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventAssignment> EventAssignments { get; set; }
-        public DbSet<EventLocation> EventLocations { get; set; }
-        public DbSet<EventManager> EventManagers { get; set; }
-        public DbSet<EventParticipant> EventParticipants { get; set; }
-        public DbSet<ManagerCredentials> ManagersCredentials { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Participant> Participants { get; set; }
         public DbSet<Owner> Owners { get; set; }
-        public DbSet<ParticipantCredentials> ParticipantsCredentials { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Booking>().ToTable("Booking");
             modelBuilder.Entity<Event>().ToTable("Event");
             modelBuilder.Entity<EventAssignment>().ToTable("EventAssignment");
-            modelBuilder.Entity<EventLocation>().ToTable("EventLocation");
-            modelBuilder.Entity<EventManager>().ToTable("EventManager");
-            modelBuilder.Entity<EventParticipant>().ToTable("EventParticipant");
-            modelBuilder.Entity<ManagerCredentials>().ToTable("ManagerCredentials");
+            modelBuilder.Entity<Location>().ToTable("Location");
+            modelBuilder.Entity<Manager>().ToTable("Manager");
+            modelBuilder.Entity<Participant>().ToTable("Participant");
             modelBuilder.Entity<Owner>().ToTable("Owner");
-            modelBuilder.Entity<ParticipantCredentials>().ToTable("ParticipantCredentials");
 
-            modelBuilder.Entity<EventAssignment>().HasKey(c => new { c.EventManagerID, c.EventID });
-            modelBuilder.Entity<EventManager>()
-            .HasOne(a => a.ManagerCredentials)
-            .WithOne(b => b.EventManager)
-            .HasForeignKey<ManagerCredentials>(b => b.ManagerID);
-            modelBuilder.Entity<EventParticipant>()
-            .HasOne(a => a.ParticipantCredentials)
-            .WithOne(b => b.EventParticipant)
-            .HasForeignKey<ParticipantCredentials>(b => b.ParticipantID);
+            modelBuilder.Entity<EventAssignment>().HasKey(c => new { c.ManagerID, c.EventID });
+            modelBuilder.Entity<Booking>().HasKey(c => new { c.ParticipantID, c.EventID });
         }
 
     }

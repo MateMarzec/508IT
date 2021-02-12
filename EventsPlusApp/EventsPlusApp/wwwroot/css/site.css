@@ -2,6 +2,10 @@
 a {
     color: #222831 !important;
 }
+.lightfont{
+    color: #EEEEEE !important;
+}
+
 
 .btn-primary {
     color: #fff;
@@ -25,7 +29,26 @@ a.navbar-brand {
     background-color: #EEEEEE !important;
 }
 .text-green {
-    color: #00ADB5 !important;
+    color: #0069D9 !important;
+}
+/* Main */
+.boxMiddle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #393E46;
+    color: #EEEEEE;
+    width: 40%;
+    height: 25%;
+    border-radius: 20px;
+    border: 2px solid #EEE;
+}
+.boxMiddle span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 /* Footer */
 html {
@@ -59,12 +82,14 @@ html {
 }
 /* Margin bottom by footer height */
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #393E46;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: #EEEEEE !important;
 }

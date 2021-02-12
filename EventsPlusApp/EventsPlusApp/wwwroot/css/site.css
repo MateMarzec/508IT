@@ -1,8 +1,9 @@
 ﻿/* Provide sufficient contrast against white background */
-a {
-    color: #222831 !important;
-}
+
 .lightfont{
+    color: #EEEEEE !important;
+}
+td a {
     color: #EEEEEE !important;
 }
 

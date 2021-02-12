@@ -4,12 +4,12 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="lightfont">Details</h1>
 
 <div>
-    <h4>Booking</h4>
+    <h4 class="lightfont">Booking</h4>
     <hr />
-    <dl class="row">
+    <dl class="row lightfont">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Participant)
         </dt>
@@ -26,5 +26,5 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="lightfont">Back to List</a>
 </div>

@@ -1,4 +1,5 @@
 ﻿using EventsPlusApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,13 +18,12 @@ namespace EventsPlusApp.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [Authorize(Policy = "writepolicy")]
+        public IActionResult Dashboard()
         {
             return View();
         }

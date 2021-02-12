@@ -22,7 +22,7 @@ namespace EventsPlusApp.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Events.Include(l => l.Location);
+            var applicationDbContext = _context.Events.Include(l => l.Location).Include(l => l.Manager).Include(l => l.Participant);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,6 +36,8 @@ namespace EventsPlusApp.Controllers
 
             var @event = await _context.Events
                 .Include(l => l.Location)
+                .Include(l => l.Manager)
+                .Include(l => l.Participant)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {
@@ -49,6 +51,8 @@ namespace EventsPlusApp.Controllers
         public IActionResult Create()
         {
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address");
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName");
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName");
             return View();
         }
 
@@ -57,7 +61,7 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Type,DateAndTime,LocationID")] Event @event)
+        public async Task<IActionResult> Create([Bind("ID,Title,Type,DateAndTime,LocationID,ManagerID,ParticipantID")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +70,8 @@ namespace EventsPlusApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -83,6 +89,8 @@ namespace EventsPlusApp.Controllers
                 return NotFound();
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -91,7 +99,7 @@ namespace EventsPlusApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Type,DateAndTime,LocationID")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Type,DateAndTime,LocationID,ManagerID,ParticipantID")] Event @event)
         {
             if (id != @event.ID)
             {
@@ -119,6 +127,8 @@ namespace EventsPlusApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
+            ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
+            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -132,6 +142,8 @@ namespace EventsPlusApp.Controllers
 
             var @event = await _context.Events
                 .Include(l => l.Location)
+                .Include(l => l.Manager)
+                .Include(l => l.Participant)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {

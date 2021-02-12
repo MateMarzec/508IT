@@ -25,6 +25,6 @@ namespace EventsPlusApp.Models
         [Column("PhoneNumber")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-        public Location EventLocation { get; set; }
+        public Location Location { get; set; }
     }
 }

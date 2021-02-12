@@ -26,6 +26,6 @@ namespace EventsPlusApp.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        public ICollection<EventAssignment> EventAssignment { get; set; }
+        public Event Event { get; set; }
     }
 }

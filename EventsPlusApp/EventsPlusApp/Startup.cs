@@ -41,7 +41,7 @@ namespace EventsPlusApp
 
             services.AddAuthorization(options => {
                 options.AddPolicy("readpolicy",
-                    builder => builder.RequireRole("Admin", "Manager", "User"));
+                    builder => builder.RequireRole("Admin",  "User"));
                 options.AddPolicy("writepolicy",
                     builder => builder.RequireRole("Admin", "Manager"));
             });

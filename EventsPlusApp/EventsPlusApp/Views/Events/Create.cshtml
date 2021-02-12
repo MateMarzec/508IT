@@ -8,9 +8,9 @@
 
 <h4 class="lightfont">Event</h4>
 <hr />
-<div class="row lightfont">
+<div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create ">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group lightfont">
                 <label asp-for="Title" class="control-label"></label>
@@ -30,6 +30,14 @@
             <div class="form-group lightfont">
                 <label asp-for="LocationID" class="control-label"></label>
                 <select asp-for="LocationID" class ="form-control" asp-items="ViewBag.LocationID"></select>
+            </div>
+            <div class="form-group lightfont">
+                <label asp-for="ManagerID" class="control-label"></label>
+                <select asp-for="ManagerID" class ="form-control" asp-items="ViewBag.ManagerID"></select>
+            </div>
+            <div class="form-group lightfont">
+                <label asp-for="ParticipantID" class="control-label"></label>
+                <select asp-for="ParticipantID" class ="form-control" asp-items="ViewBag.ParticipantID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

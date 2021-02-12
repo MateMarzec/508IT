@@ -27,8 +27,10 @@ namespace EventsPlusApp.Models
         [Display(Name = "Start Date")]
         public DateTime DateAndTime { get; set; }
         public int LocationID { get; set; }
+        public int ManagerID { get; set; }
+        public int ParticipantID { get; set; }
         public Location Location { get; set; }
-        public ICollection<EventAssignment> EventAssignments { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+        public Manager Manager { get; set; }
+        public Participant Participant { get; set; }
     }
 }

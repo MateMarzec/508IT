@@ -1,4 +1,5 @@
 ﻿using EventsPlusApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +27,24 @@ namespace EventsPlusApp.Data
             modelBuilder.Entity<Manager>().ToTable("Manager");
             modelBuilder.Entity<Participant>().ToTable("Participant");
             modelBuilder.Entity<Owner>().ToTable("Owner");
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "1",
+                Name = "Admin",
+                NormalizedName = "ADMIN",
+                ConcurrencyStamp = "1"
+            });
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "2",
+                Name = "User",
+                NormalizedName = "USER",
+                ConcurrencyStamp = "2"
+            });
+
         }
 
     }

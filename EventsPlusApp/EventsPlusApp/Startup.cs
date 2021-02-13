@@ -43,7 +43,7 @@ namespace EventsPlusApp
                 options.AddPolicy("readpolicy",
                     builder => builder.RequireRole("Admin",  "User"));
                 options.AddPolicy("writepolicy",
-                    builder => builder.RequireRole("Admin", "Manager"));
+                    builder => builder.RequireRole("Admin"));
             });
 
         }

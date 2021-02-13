@@ -242,3 +242,5 @@ D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\V
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Details.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Edit.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Index.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\RoleControllers\Create.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\RoleControllers\Index.cshtml.g.cs

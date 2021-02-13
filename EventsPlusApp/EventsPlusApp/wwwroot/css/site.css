@@ -33,6 +33,12 @@ a.navbar-brand {
     color: #0069D9 !important;
 }
 /* Main */
+.boxDash {
+    border: 2px solid #EEE;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 10px;
+}
 .boxMiddle {
     position: absolute;
     top: 50%;
@@ -44,6 +50,7 @@ a.navbar-brand {
     height: 25%;
     border-radius: 20px;
     border: 2px solid #EEE;
+    text-align: center;
 }
 .boxMiddle span{
     position: absolute;
@@ -51,9 +58,17 @@ a.navbar-brand {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+i.lightfont{
+    width: 20px;
+    height: 20px;
+}
+
+.dashboardBox {
+    margin-top: 20px;
+}
 /* Footer */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {

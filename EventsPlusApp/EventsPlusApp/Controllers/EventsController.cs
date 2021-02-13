@@ -54,15 +54,18 @@ namespace EventsPlusApp.Controllers
             {
                 return NotFound();
             }
-
             var @event = await _context.Events
                 .Include(l => l.Location)
                 .Include(l => l.Manager)
+                .Include(l => l.Participants)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {
                 return NotFound();
             }
+            ViewBag.FootballPlayers = _context.Events
+                .Include(c => c.Participants).Where(c => c.ID == id)
+                .Single().Participants;
 
             return View(@event);
         }

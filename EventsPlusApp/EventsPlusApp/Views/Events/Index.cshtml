@@ -1,7 +1,5 @@
 ﻿@model EventsPlusApp.ViewModels.Booking
 
-
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -54,31 +52,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Manager.FirstName)
             </td>
-            @if (Model.Participants != null)
-            {
                 <td>
-                    <a asp-action="Select" asp-route-id="@item.ID">Select</a>
+                    <a asp-action="Index" asp-route-id="@item.ID">Select</a>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> 
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
-            }
-            @if (Model.Participants == null)
-            {
-                <td>
-                    
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> 
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            }
         </tr>
         }
     </tbody>
 </table>
-@if (Model.Events != null && Model.Participants != null)
+@if (Model.Participants != null)
 {
 <h1>The participants of the event</h1>
+
 <table class="table">
     <thead>
         <tr>

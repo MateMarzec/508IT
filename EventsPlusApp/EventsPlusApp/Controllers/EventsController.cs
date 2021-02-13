@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventsPlusApp.Data;
 using EventsPlusApp.Models;
+using EventsPlusApp.ViewModels;
 
 namespace EventsPlusApp.Controllers
 {
@@ -20,11 +21,31 @@ namespace EventsPlusApp.Controllers
         }
 
         // GET: Events
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index_default()
         {
-            var applicationDbContext = _context.Events.Include(l => l.Location).Include(l => l.Manager).Include(l => l.Participant);
+            var applicationDbContext = _context.Events.Include(l => l.Location).Include(l => l.Manager);
             return View(await applicationDbContext.ToListAsync());
         }
+
+        public ViewResult Index(int? id)
+        {
+            var viewModel = new Booking();
+            viewModel.Events = _context.Events
+              .Include(l => l.Location)
+              .Include(l => l.Manager)
+              .Include(c => c.Participants)
+              .OrderBy(c => c.Title);
+
+            if (id != null)
+            {
+                ViewBag.eventID = id.Value;
+                viewModel.Participants = viewModel.Events.Where(
+                  f => f.ID == id.Value).Single().Participants;
+            }
+
+            return View(viewModel);
+        }
+
 
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -37,7 +58,6 @@ namespace EventsPlusApp.Controllers
             var @event = await _context.Events
                 .Include(l => l.Location)
                 .Include(l => l.Manager)
-                .Include(l => l.Participant)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {
@@ -52,7 +72,6 @@ namespace EventsPlusApp.Controllers
         {
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address");
             ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName");
-            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName");
             return View();
         }
 
@@ -71,7 +90,6 @@ namespace EventsPlusApp.Controllers
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
-            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -90,7 +108,6 @@ namespace EventsPlusApp.Controllers
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
-            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -128,7 +145,6 @@ namespace EventsPlusApp.Controllers
             }
             ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", @event.LocationID);
             ViewData["ManagerID"] = new SelectList(_context.Managers, "ID", "FirstName", @event.ManagerID);
-            ViewData["ParticipantID"] = new SelectList(_context.Participants, "ID", "FirstName", @event.ParticipantID);
             return View(@event);
         }
 
@@ -143,7 +159,6 @@ namespace EventsPlusApp.Controllers
             var @event = await _context.Events
                 .Include(l => l.Location)
                 .Include(l => l.Manager)
-                .Include(l => l.Participant)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@event == null)
             {

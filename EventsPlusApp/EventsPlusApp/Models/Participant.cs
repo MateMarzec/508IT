@@ -26,6 +26,8 @@ namespace EventsPlusApp.Models
         [Column("PhoneNumber")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-        public Event Event{ get; set; }
+        public int? EventID { get; set; }
+        public Event? Event{ get; set; }
+        public IEnumerable<Participant> Participants { get; set; }
     }
 }

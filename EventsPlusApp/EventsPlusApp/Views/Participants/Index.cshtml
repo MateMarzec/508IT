@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="lightfont">Index</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="lightfont">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table lightfont">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -20,6 +20,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event)
             </th>
             <th></th>
         </tr>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.Title)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

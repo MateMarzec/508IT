@@ -222,11 +222,6 @@ D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\V
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Events\Details.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Events\Edit.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Events\Index.cshtml.g.cs
-D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Create.cshtml.g.cs
-D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Delete.cshtml.g.cs
-D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Details.cshtml.g.cs
-D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Edit.cshtml.g.cs
-D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Index.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Locations\Create.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Locations\Delete.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Locations\Details.cshtml.g.cs
@@ -237,6 +232,11 @@ D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\V
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Managers\Details.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Managers\Edit.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Managers\Index.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Create.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Delete.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Details.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Edit.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Owners\Index.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Create.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Delete.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\Participants\Details.cshtml.g.cs

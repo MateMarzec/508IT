@@ -4,46 +4,41 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1 class="lightfont">Edit</h1>
+<h1>Edit</h1>
 
-<h4 class="lightfont">Event</h4>
+<h4>Event</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <input asp-for="Type" class="form-control" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <label asp-for="DateAndTime" class="control-label"></label>
                 <input asp-for="DateAndTime" class="form-control" />
                 <span asp-validation-for="DateAndTime" class="text-danger"></span>
             </div>
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <label asp-for="LocationID" class="control-label"></label>
                 <select asp-for="LocationID" class="form-control" asp-items="ViewBag.LocationID"></select>
                 <span asp-validation-for="LocationID" class="text-danger"></span>
             </div>
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <label asp-for="ManagerID" class="control-label"></label>
                 <select asp-for="ManagerID" class="form-control" asp-items="ViewBag.ManagerID"></select>
                 <span asp-validation-for="ManagerID" class="text-danger"></span>
             </div>
-            <div class="form-group lightfont">
-                <label asp-for="ParticipantID" class="control-label"></label>
-                <select asp-for="ParticipantID" class="form-control" asp-items="ViewBag.ParticipantID"></select>
-                <span asp-validation-for="ParticipantID" class="text-danger"></span>
-            </div>
-            <div class="form-group lightfont">
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -51,7 +46,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" class="lightfont">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

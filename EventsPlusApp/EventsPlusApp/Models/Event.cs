@@ -23,14 +23,12 @@ namespace EventsPlusApp.Models
         public string Type { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
         public DateTime DateAndTime { get; set; }
         public int LocationID { get; set; }
         public int ManagerID { get; set; }
-        public int ParticipantID { get; set; }
         public Location Location { get; set; }
         public Manager Manager { get; set; }
-        public Participant Participant { get; set; }
+        public ICollection<Participant> Participants { get; set; }
     }
 }

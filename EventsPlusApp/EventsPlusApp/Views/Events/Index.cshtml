@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="lightfont">Index</h1>
 
-<p>
+<p class="lightfont">
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table lightfont">
     <thead>
         <tr>
             <th>
@@ -64,9 +64,9 @@
 </table>
 @if (Model.Participants != null)
 {
-<h1>The participants of the event</h1>
+<h1 class="lightfont">The participants of the event</h1>
 
-<table class="table">
+<table class="table lightfont">
     <thead>
         <tr>
             <th>
@@ -76,9 +76,11 @@
                 Last Name
             </th>
             <th>
+                Phone Number
+            </th>
+            <th>
                 Event
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -98,9 +100,6 @@
                 @Html.DisplayFor(modelItem => item.Event.Title)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
         }

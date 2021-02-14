@@ -38,6 +38,31 @@ a.navbar-brand {
     border-radius: 20px;
     margin-top: 20px;
     padding: 10px;
+    height: 200px;
+    position: relative;
+}
+.iconArrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.iconArrow img{
+    height: 40px;
+    width: 40px;
+}
+.textBox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%, -50%);
+    width: 90px;
+}
+.iconLogo {
+    position: absolute;
+    Left: 20px;
+    top: 20px;
+    width: 60px;
+    height: 60px;
 }
 .boxMiddle {
     position: absolute;

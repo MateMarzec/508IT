@@ -22,7 +22,7 @@ namespace EventsPlusApp.Controllers
         {
             return View();
         }
-        [Authorize(Policy = "writepolicy")]
+        [Authorize(Policy = "readpolicy")]
         public IActionResult Dashboard()
         {
             return View();

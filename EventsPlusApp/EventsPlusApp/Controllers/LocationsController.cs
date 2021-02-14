@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventsPlusApp.Data;
 using EventsPlusApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventsPlusApp.Controllers
 {
@@ -18,14 +19,14 @@ namespace EventsPlusApp.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Locations
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Locations.Include(l => l.Owner);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,14 @@ namespace EventsPlusApp.Controllers
 
             return View(location);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Locations/Create
         public IActionResult Create()
         {
             ViewData["OwnerID"] = new SelectList(_context.Owners, "ID", "FirstName");
             return View();
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Locations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,7 +69,7 @@ namespace EventsPlusApp.Controllers
             ViewData["OwnerID"] = new SelectList(_context.Owners, "ID", "FirstName", location.OwnerID);
             return View(location);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +86,7 @@ namespace EventsPlusApp.Controllers
             ViewData["OwnerID"] = new SelectList(_context.Owners, "ID", "FirstName", location.OwnerID);
             return View(location);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Locations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +122,7 @@ namespace EventsPlusApp.Controllers
             ViewData["OwnerID"] = new SelectList(_context.Owners, "ID", "FirstName", location.OwnerID);
             return View(location);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +141,7 @@ namespace EventsPlusApp.Controllers
 
             return View(location);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

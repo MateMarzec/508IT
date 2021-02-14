@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventsPlusApp.Data;
 using EventsPlusApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventsPlusApp.Controllers
 {
@@ -18,13 +19,13 @@ namespace EventsPlusApp.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Owners
         public async Task<IActionResult> Index()
         {
             return View(await _context.Owners.ToListAsync());
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Owners/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,13 +43,13 @@ namespace EventsPlusApp.Controllers
 
             return View(owner);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Owners/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Owners/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,7 +65,7 @@ namespace EventsPlusApp.Controllers
             }
             return View(owner);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Owners/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,7 +81,7 @@ namespace EventsPlusApp.Controllers
             }
             return View(owner);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Owners/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,7 +116,7 @@ namespace EventsPlusApp.Controllers
             }
             return View(owner);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Owners/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,7 +134,7 @@ namespace EventsPlusApp.Controllers
 
             return View(owner);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Owners/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

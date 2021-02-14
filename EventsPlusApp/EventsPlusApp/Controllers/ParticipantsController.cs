@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventsPlusApp.Data;
 using EventsPlusApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventsPlusApp.Controllers
 {
@@ -18,14 +19,14 @@ namespace EventsPlusApp.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Participants
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Participants.Include(p => p.Event);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Policy = "readpolicy")]
         // GET: Participants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,14 +45,14 @@ namespace EventsPlusApp.Controllers
 
             return View(participant);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Participants/Create
         public IActionResult Create()
         {
             ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title");
             return View();
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Participants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -68,7 +69,7 @@ namespace EventsPlusApp.Controllers
             ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", participant.EventID);
             return View(participant);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Participants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +86,7 @@ namespace EventsPlusApp.Controllers
             ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", participant.EventID);
             return View(participant);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Participants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +122,7 @@ namespace EventsPlusApp.Controllers
             ViewData["EventID"] = new SelectList(_context.Events, "ID", "Title", participant.EventID);
             return View(participant);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // GET: Participants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +141,7 @@ namespace EventsPlusApp.Controllers
 
             return View(participant);
         }
-
+        [Authorize(Policy = "writepolicy")]
         // POST: Participants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

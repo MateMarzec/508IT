@@ -30,21 +30,34 @@ namespace EventsPlusApp.Data
             modelBuilder.Entity<Participant>().ToTable("Participant");
             modelBuilder.Entity<Owner>().ToTable("Owner");
 
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            
+
+            var appUser = new IdentityUser
             {
-                Id = "1",
-                Name = "Admin",
-                NormalizedName = "ADMIN",
-                ConcurrencyStamp = "1"
-            });
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                EmailConfirmed = true,
+            };
+            var userRole = new IdentityRole { Name = "User", NormalizedName = "USER" };
+            var adminRole = new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" };
+            var hasher = new PasswordHasher<IdentityUser>();
+            appUser.PasswordHash = hasher.HashPassword(appUser, "Password");
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                userRole
+            );
+            modelBuilder.Entity<IdentityRole>().HasData(
+                adminRole
+            );
+            modelBuilder.Entity<IdentityUser>().HasData(
+                appUser
+            );
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                Id = "2",
-                Name = "User",
-                NormalizedName = "USER",
-                ConcurrencyStamp = "2"
+                RoleId = adminRole.Id,
+                UserId = appUser.Id
             });
         }
 

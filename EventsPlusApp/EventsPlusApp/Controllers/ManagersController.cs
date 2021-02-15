@@ -21,9 +21,35 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Managers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Managers.ToListAsync());
+            ViewData["FirstNameSort"] = String.IsNullOrEmpty(sortOrder) ? "FirstName_Desc" : "";
+            ViewData["LastNameSort"] = sortOrder == "LastName_Asc" ? "LastName_Desc" : "LastName_Asc";
+            ViewData["PhoneNumberSort"] = sortOrder == "PhoneNumber_Asc" ? "PhoneNumber_Desc" : "PhoneNumber_Asc";
+            var Managers = from f in _context.Managers
+                               select f;
+            switch (sortOrder)
+            {
+                case "FirstName_Desc":
+                    Managers = Managers.OrderByDescending(f => f.FirstName);
+                    break;
+                case "LastName_Asc":
+                    Managers = Managers.OrderBy(f => f.LastName);
+                    break;
+                case "LastName_Desc":
+                    Managers = Managers.OrderByDescending(f => f.LastName);
+                    break;
+                case "PhoneNumber_Asc":
+                    Managers = Managers.OrderBy(f => f.PhoneNumber);
+                    break;
+                case "PhoneNumber_Desc":
+                    Managers = Managers.OrderByDescending(f => f.PhoneNumber);
+                    break;
+                default:
+                    Managers = Managers.OrderBy(f => f.FirstName);
+                    break;
+            }
+            return View(Managers);
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Managers/Details/5

@@ -21,10 +21,63 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Locations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Locations.Include(l => l.Owner);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["NameSort"] = String.IsNullOrEmpty(sortOrder) ? "Name_Desc" : "";
+            ViewData["MaximumNumberofParticipantsSort"] = sortOrder == "MaximumNumberofParticipants_Asc" ? "MaximumNumberofParticipants_Desc" : "MaximumNumberofParticipants_Asc";
+            ViewData["PostCodeSort"] = sortOrder == "PostCode_Asc" ? "PostCode_Desc" : "PostCode_Asc";
+            ViewData["AddressSort"] = sortOrder == "Address_Asc" ? "Address_Desc" : "Address_Asc";
+            ViewData["CitySort"] = sortOrder == "City_Asc" ? "City_Desc" : "City_Asc";
+            ViewData["CountrySort"] = sortOrder == "Country_Asc" ? "Country_Desc" : "Country_Asc";
+            ViewData["OwnerIDSort"] = sortOrder == "OwnerID_Asc" ? "OwnerID_Desc" : "OwnerID_Asc";
+            var Locations = from f in _context.Locations.Include(f => f.Owner)
+                               select f;
+            switch (sortOrder)
+            {
+                case "Name_Desc":
+                    Locations = Locations.OrderByDescending(f => f.Name);
+                    break;
+                case "MaximumNumberofParticipants_Asc":
+                    Locations = Locations.OrderBy(f => f.MaximumNumberofParticipants);
+                    break;
+                case "MaximumNumberofParticipants_Desc":
+                    Locations = Locations.OrderByDescending(f => f.MaximumNumberofParticipants);
+                    break;
+                case "PostCode_Asc":
+                    Locations = Locations.OrderBy(f => f.PostCode);
+                    break;
+                case "PostCode_Desc":
+                    Locations = Locations.OrderByDescending(f => f.PostCode);
+                    break;
+                case "Address_Asc":
+                    Locations = Locations.OrderBy(f => f.Address);
+                    break;
+                case "Address_Desc":
+                    Locations = Locations.OrderByDescending(f => f.Address);
+                    break;
+                case "City_Asc":
+                    Locations = Locations.OrderBy(f => f.City);
+                    break;
+                case "City_Desc":
+                    Locations = Locations.OrderByDescending(f => f.City);
+                    break;
+                case "Country_Asc":
+                    Locations = Locations.OrderBy(f => f.Country);
+                    break;
+                case "Country_Desc":
+                    Locations = Locations.OrderByDescending(f => f.Country);
+                    break;
+                case "OwnerID_Asc":
+                    Locations = Locations.OrderBy(f => f.Owner.ID);
+                    break;
+                case "OwnerID_Desc":
+                    Locations = Locations.OrderByDescending(f => f.Owner.ID);
+                    break;
+                default:
+                    Locations = Locations.OrderBy(f => f.Name);
+                    break;
+            }
+            return View(Locations);
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Locations/Details/5

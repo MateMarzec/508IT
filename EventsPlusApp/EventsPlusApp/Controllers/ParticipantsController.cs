@@ -21,11 +21,44 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Participants
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Participants.Include(p => p.Event);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["FirstNameSort"] = String.IsNullOrEmpty(sortOrder) ? "FirstName_Desc" : "";
+            ViewData["LastNameSort"] = sortOrder == "LastName_Asc" ? "LastName_Desc" : "LastName_Asc";
+            ViewData["PhoneNumberSort"] = sortOrder == "PhoneNumber_Asc" ? "PhoneNumber_Desc" : "PhoneNumber_Asc";
+            ViewData["EventIDSort"] = sortOrder == "EventID_Asc" ? "EventID_Desc" : "EventID_Asc";
+            var Participants = from f in _context.Participants.Include(f => f.Event)
+                                  select f;
+            switch (sortOrder)
+            {
+                case "FirstName_Desc":
+                    Participants = Participants.OrderByDescending(f => f.FirstName);
+                    break;
+                case "LastName_Asc":
+                    Participants = Participants.OrderBy(f => f.LastName);
+                    break;
+                case "LastName_Desc":
+                    Participants = Participants.OrderByDescending(f => f.LastName);
+                    break;
+                case "PhoneNumber_Asc":
+                    Participants = Participants.OrderBy(f => f.PhoneNumber);
+                    break;
+                case "PhoneNumber_Desc":
+                    Participants = Participants.OrderByDescending(f => f.PhoneNumber);
+                    break;
+                case "EventID_Desc":
+                    Participants = Participants.OrderByDescending(f => f.Event.ID);
+                    break;
+                case "EventID_Asc":
+                    Participants = Participants.OrderBy(f => f.Event.ID);
+                    break;
+                default:
+                    Participants = Participants.OrderBy(f => f.FirstName);
+                    break;
+            }
+            return View(Participants);
         }
+
         [Authorize(Policy = "readpolicy")]
         // GET: Participants/Details/5
         public async Task<IActionResult> Details(int? id)

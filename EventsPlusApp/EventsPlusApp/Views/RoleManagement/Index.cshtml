@@ -1,6 +1,6 @@
 ﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
 @{ ViewData["Title"] = "Index"; }
-<h3 class="text-center">User Role Management</h3>
+<h1 class="text-center lightfont">Role Management</h1>
 <hr />
 <div class="container">
     <a asp-action="AddUserToRole" class="btn btn-info mr-2">Assign user to role</a>
@@ -10,7 +10,7 @@
             {<p>No users</p> }
             else
             {
-                <table class="table">
+                <table class="table lightfont">
                     <thead>
                         <tr><th>UserName</th><th>Actions</th></tr>
                     </thead>
@@ -19,7 +19,7 @@
                         {
                             <tr>
                                 <td>@u.UserName</td>
-                                <td><a class="btn btn-success" asp-route-userId="@u.Id" asp-action="Details">View Details</a>    </td>
+                                <td><a class="btn btn-info" asp-route-userId="@u.Id" asp-action="Details">View Details</a>    </td>
                             </tr>
 }
                     </tbody>

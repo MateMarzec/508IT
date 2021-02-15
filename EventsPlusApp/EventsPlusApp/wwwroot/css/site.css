@@ -134,3 +134,10 @@ body {
     line-height: 60px;
     background-color: #EEEEEE !important;
 }
+@media (max-width: 767px) {
+    .boxMiddle {
+        width: 70%;
+        height: 25%;
+    }
+}
+ 

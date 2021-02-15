@@ -1,6 +1,6 @@
 ﻿@model List<string>
 @{ViewData["Title"] = "Details";}
-<h3 class="text-center">User: <b>@ViewBag.UserName</b></h3>
+<h3 class="text-center lightfont">User: <b>@ViewBag.UserName</b></h3>
 <hr />
 <a asp-action="AddUserToRole" class="btn btn-info mr-2">Assign user to role</a>
 <div class="container">
@@ -10,8 +10,7 @@
             {<p>No roles found!</p> }
             else
             {
-                <h3 class="text-center">Roles</h3>
-                <table class="table">
+                <table class="table lightfont">
                     <thead>
                         <tr><th>Role Name</th><th>Actions</th></tr>
                     </thead>
@@ -21,7 +20,7 @@
                             <tr>
                                 <td>@r</td>
                                 <td>
-                                    <a class="btn btn-outline-danger"
+                                    <a class="btn btn-danger"
                                        asp-route-role="@r" asp-route-userName="@ViewBag.UserName"
                                        asp-action="RemoveUserRole"
                                        onclick="return confirm('Are you sure to remove this role from user?')">Remove Role</a>

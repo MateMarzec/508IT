@@ -21,7 +21,7 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Locations
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["NameSort"] = String.IsNullOrEmpty(sortOrder) ? "Name_Desc" : "";
             ViewData["MaximumNumberofParticipantsSort"] = sortOrder == "MaximumNumberofParticipants_Asc" ? "MaximumNumberofParticipants_Desc" : "MaximumNumberofParticipants_Asc";
@@ -77,7 +77,29 @@ namespace EventsPlusApp.Controllers
                     Locations = Locations.OrderBy(f => f.Name);
                     break;
             }
-            return View(Locations);
+            /*** Search Script ****/
+            ViewData["CurrentFilter"] = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Locations = Locations.Where(f => f.Name.Contains(searchString)
+                         || f.PostCode.Contains(searchString)
+                         || f.Address.Contains(searchString)
+                         || f.City.Contains(searchString)
+                         || f.Country.Contains(searchString)
+                         || f.Owner.FirstName.Contains(searchString));
+            }
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Location>.CreateAsync(Locations.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Locations/Details/5

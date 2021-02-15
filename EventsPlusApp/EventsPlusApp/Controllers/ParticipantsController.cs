@@ -21,7 +21,7 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Participants
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["FirstNameSort"] = String.IsNullOrEmpty(sortOrder) ? "FirstName_Desc" : "";
             ViewData["LastNameSort"] = sortOrder == "LastName_Asc" ? "LastName_Desc" : "LastName_Asc";
@@ -56,7 +56,27 @@ namespace EventsPlusApp.Controllers
                     Participants = Participants.OrderBy(f => f.FirstName);
                     break;
             }
-            return View(Participants);
+            /*** Search Script ****/
+            ViewData["CurrentFilter"] = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Participants = Participants.Where(f => f.FirstName.Contains(searchString)
+                         || f.LastName.Contains(searchString)
+                         || f.PhoneNumber.Contains(searchString)
+                         || f.Event.Title.Contains(searchString));
+            }
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Participant>.CreateAsync(Participants.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         [Authorize(Policy = "readpolicy")]

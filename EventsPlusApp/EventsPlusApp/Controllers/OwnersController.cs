@@ -21,7 +21,7 @@ namespace EventsPlusApp.Controllers
         }
         [Authorize(Policy = "readpolicy")]
         // GET: Owners
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["FirstNameSort"] = String.IsNullOrEmpty(sortOrder) ? "FirstName_Desc" : "";
             ViewData["LastNameSort"] = sortOrder == "LastName_Asc" ? "LastName_Desc" : "LastName_Asc";
@@ -49,7 +49,26 @@ namespace EventsPlusApp.Controllers
                     Owners = Owners.OrderBy(f => f.FirstName);
                     break;
             }
-            return View(Owners);
+            /*** Search Script ****/
+            ViewData["CurrentFilter"] = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Owners = Owners.Where(f => f.FirstName.Contains(searchString)
+                         || f.LastName.Contains(searchString)
+                         || f.PhoneNumber.Contains(searchString));
+            }
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Owner>.CreateAsync(Owners.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         [Authorize(Policy = "readpolicy")]

@@ -1,4 +1,5 @@
 ﻿using EventsPlusApp.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace EventsPlusApp.Data
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Owner> Owners { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -44,7 +46,6 @@ namespace EventsPlusApp.Data
                 NormalizedName = "USER",
                 ConcurrencyStamp = "2"
             });
-
         }
 
     }

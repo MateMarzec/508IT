@@ -20,6 +20,12 @@ namespace EventsPlusApp.Controllers
             _context = context;
         }
         [Authorize(Policy = "readpolicy")]
+        public async Task<IActionResult> Index_defualt()
+        {
+            var applicationDbContext = _context.Locations.Include(l => l.Owner);
+            return View(await _context.Locations.ToListAsync());
+        }
+        [Authorize(Policy = "readpolicy")]
         // GET: Locations
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace EventsPlusApp.Tests.Controllers
 {
-    public class OwnersControllerTests
+    public class LocationsControllerTests
     {
         private async Task<ApplicationDbContext> GetDatabaseContext()
         {
@@ -24,6 +24,7 @@ namespace EventsPlusApp.Tests.Controllers
             if (await databaseContext.Users.CountAsync() <= 0)
             {
                 databaseContext.Owners.AddRange(owners());
+                databaseContext.Locations.AddRange(locations());
                 await databaseContext.SaveChangesAsync();
             }
             return databaseContext;
@@ -37,18 +38,26 @@ namespace EventsPlusApp.Tests.Controllers
             };
         }
 
+        private List<Location> locations()
+        {
+            return new List<Location>{
+                new Location{ ID = 1, MaximumNumberofParticipants=111, Name="TestName1", PostCode="111111", Address="TestAddress1", City="TestCity1", Country="TestCountry1", OwnerID = owners().Single( s => s.FirstName == "TestName1").ID},
+                new Location{ ID = 2, MaximumNumberofParticipants=222, Name="TestName2", PostCode="222222", Address="TestAddress2", City="TestCity2", Country="TestCountry2", OwnerID = owners().Single( s => s.FirstName == "TestName2").ID}
+            };
+        }
+
         [Fact]
         public async Task Index_ReturnsAViewResult_WithAListOfOwners()
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var locationssController = new LocationsController(dbContext);
             //Act
-            var result = await ownerssController.Index_defualt();
+            var result = await locationssController.Index_defualt();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<IEnumerable<Owner>>(
+            var model = Assert.IsAssignableFrom<IEnumerable<Location>>(
               viewResult.ViewData.Model);
             Assert.Equal(2, model.Count());
         }
@@ -58,17 +67,21 @@ namespace EventsPlusApp.Tests.Controllers
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var locationssController = new LocationsController(dbContext);
 
             //Act
-            var result = await ownerssController.Details(1);
+            var result = await locationssController.Details(1);
             //Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsType<Owner>(
+            var model = Assert.IsType<Location>(
             viewResult.ViewData.Model);
-            Assert.Equal("111111111", model.PhoneNumber);
-            Assert.Equal("TestLName1", model.LastName);
-            Assert.Equal("TestName1", model.FirstName);
+            Assert.Equal("TestName1", model.Owner.FirstName);
+            Assert.Equal("TestCountry1", model.Country);
+            Assert.Equal("TestCity1", model.City);
+            Assert.Equal("TestAddress1", model.Address);
+            Assert.Equal("111111", model.PostCode);
+            Assert.Equal("TestName1", model.Name);
+            Assert.Equal(111, model.MaximumNumberofParticipants);
             Assert.Equal(1, model.ID);
         }
 
@@ -76,13 +89,13 @@ namespace EventsPlusApp.Tests.Controllers
         [InlineData(-1)]
         [InlineData(0)]
         [InlineData(4)]
-        public async Task Edit_ReturnsHttpNotFoundWhenClubIdNotFound(int OwnerID)
+        public async Task Edit_ReturnsHttpNotFoundWhenClubIdNotFound(int LocationID)
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var locationssController = new LocationsController(dbContext);
             //Act
-            var result = await ownerssController.Edit(OwnerID);
+            var result = await locationssController.Edit(LocationID);
 
             //Assert
             Assert.IsType<NotFoundResult>(result);

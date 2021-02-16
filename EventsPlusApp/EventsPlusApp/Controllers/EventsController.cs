@@ -20,9 +20,9 @@ namespace EventsPlusApp.Controllers
         {
             _context = context;
         }
-        [Authorize(Policy = "writepolicy")]
+        [Authorize(Policy = "readpolicy")]
         // GET: Events
-        public async Task<IActionResult> Index_default()
+        public async Task<IActionResult> Index_defualt()
         {
             var applicationDbContext = _context.Events.Include(l => l.Location).Include(l => l.Manager);
             return View(await applicationDbContext.ToListAsync());

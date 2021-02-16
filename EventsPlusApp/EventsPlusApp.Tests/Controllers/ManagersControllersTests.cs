@@ -12,7 +12,7 @@ using Xunit;
 
 namespace EventsPlusApp.Tests.Controllers
 {
-    public class OwnersControllerTests
+    public class ManagersControllerTests
     {
         private async Task<ApplicationDbContext> GetDatabaseContext()
         {
@@ -23,17 +23,17 @@ namespace EventsPlusApp.Tests.Controllers
             databaseContext.Database.EnsureCreated();
             if (await databaseContext.Users.CountAsync() <= 0)
             {
-                databaseContext.Owners.AddRange(owners());
+                databaseContext.Managers.AddRange(managers());
                 await databaseContext.SaveChangesAsync();
             }
             return databaseContext;
         }
 
-        private List<Owner> owners()
+        private List<Manager> managers()
         {
-            return new List<Owner>{
-                new Owner{ ID = 1, FirstName="TestName1", LastName="TestLName1", PhoneNumber="111111111"},
-                new Owner{ ID = 2, FirstName="TestName2", LastName="TestLName2", PhoneNumber="222222222"}
+            return new List<Manager>{
+                new Manager{ ID = 1, FirstName="TestName1", LastName="TestLName1", PhoneNumber="111111111"},
+                new Manager{ ID = 2, FirstName="TestName2", LastName="TestLName2", PhoneNumber="222222222"}
             };
         }
 
@@ -42,13 +42,13 @@ namespace EventsPlusApp.Tests.Controllers
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var managerssController = new ManagersController(dbContext);
             //Act
-            var result = await ownerssController.Index_defualt();
+            var result = await managerssController.Index_defualt();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<IEnumerable<Owner>>(
+            var model = Assert.IsAssignableFrom<IEnumerable<Manager>>(
               viewResult.ViewData.Model);
             Assert.Equal(2, model.Count());
         }
@@ -58,13 +58,13 @@ namespace EventsPlusApp.Tests.Controllers
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var managerssController = new ManagersController(dbContext);
 
             //Act
-            var result = await ownerssController.Details(1);
+            var result = await managerssController.Details(1);
             //Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsType<Owner>(
+            var model = Assert.IsType<Manager>(
             viewResult.ViewData.Model);
             Assert.Equal("111111111", model.PhoneNumber);
             Assert.Equal("TestLName1", model.LastName);
@@ -76,13 +76,13 @@ namespace EventsPlusApp.Tests.Controllers
         [InlineData(-1)]
         [InlineData(0)]
         [InlineData(4)]
-        public async Task Edit_ReturnsHttpNotFoundWhenClubIdNotFound(int OwnerID)
+        public async Task Edit_ReturnsHttpNotFoundWhenClubIdNotFound(int ManagerID)
         {
             //Arrange
             var dbContext = await GetDatabaseContext();
-            var ownerssController = new OwnersController(dbContext);
+            var managerssController = new ManagersController(dbContext);
             //Act
-            var result = await ownerssController.Edit(OwnerID);
+            var result = await managerssController.Edit(ManagerID);
 
             //Assert
             Assert.IsType<NotFoundResult>(result);

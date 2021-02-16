@@ -20,6 +20,12 @@ namespace EventsPlusApp.Controllers
             _context = context;
         }
         [Authorize(Policy = "readpolicy")]
+        public async Task<IActionResult> Index_defualt()
+        {
+            var applicationDbContext = _context.Participants.Include(l => l.Event);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        [Authorize(Policy = "readpolicy")]
         // GET: Participants
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {

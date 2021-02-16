@@ -19,6 +19,7 @@ namespace EventsPlusApp
             CreateDbIfNotExists(host);
             host.Run();
         }
+        // Create database if not exists
         private static void CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())

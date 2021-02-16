@@ -23,16 +23,16 @@ namespace FootballClubApplication.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //get all users and send to view
+            //Get all users and send to view
             var users = userManager.Users.ToList();
             return View(users);
         }
         [HttpGet]
         public async Task<IActionResult> Details(string userId)
         {
-            //find user by userId
+            //Find user by userId
             //Add UserName to ViewBag
-            //get userRole of users and send to view
+            //Get userRole of users and send to view
             var user = await userManager.FindByIdAsync(userId);
             ViewBag.UserName = user.UserName;
             var userRoles = await userManager.GetRolesAsync(user);
@@ -53,7 +53,7 @@ namespace FootballClubApplication.Controllers
         public async Task<IActionResult> AddUserToRole(string UserId, string RoleName)
         {
             var user = await userManager.FindByIdAsync(UserId);
-            await userManager.AddToRoleAsync(user, RoleName); //assign role to user
+            await userManager.AddToRoleAsync(user, RoleName); //Assign role to user
             return RedirectToAction(nameof(Index));
         }
 
@@ -61,7 +61,7 @@ namespace FootballClubApplication.Controllers
         public async Task<IActionResult> RemoveUserRole(string role, string userName)
         {
             var user = await userManager.FindByNameAsync(userName);
-            //remove role of user using userManager
+            //Remove role of user using userManager
             var result = await userManager.RemoveFromRoleAsync(user, role);
             return RedirectToAction(nameof(Details), new { userId = user.Id });
         }

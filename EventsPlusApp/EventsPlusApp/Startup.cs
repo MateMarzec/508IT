@@ -39,6 +39,7 @@ namespace EventsPlusApp
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            // Create policies and assign roles to policies
             services.AddAuthorization(options => {
                 options.AddPolicy("readpolicy",
                     builder => builder.RequireRole("Admin",  "User"));

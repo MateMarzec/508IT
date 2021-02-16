@@ -31,7 +31,7 @@ namespace EventsPlusApp.Data
             modelBuilder.Entity<Owner>().ToTable("Owner");
 
             
-
+            //Seed user
             var appUser = new IdentityUser
             {
                 UserName = "admin@admin.com",
@@ -40,8 +40,10 @@ namespace EventsPlusApp.Data
                 NormalizedEmail = "ADMIN@ADMIN.COM",
                 EmailConfirmed = true,
             };
+            //Seed roles
             var userRole = new IdentityRole { Name = "User", NormalizedName = "USER" };
             var adminRole = new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" };
+            //Hash password for seeded user
             var hasher = new PasswordHasher<IdentityUser>();
             appUser.PasswordHash = hasher.HashPassword(appUser, "Password");
 
@@ -54,6 +56,7 @@ namespace EventsPlusApp.Data
             modelBuilder.Entity<IdentityUser>().HasData(
                 appUser
             );
+            //Assign seeded user to the admin role
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = adminRole.Id,

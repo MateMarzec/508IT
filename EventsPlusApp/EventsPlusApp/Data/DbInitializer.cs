@@ -7,6 +7,7 @@ namespace EventsPlusApp.Data
 {
     public static class DbInitializer
     {
+        //Initialize database
         public static void Initialize(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();

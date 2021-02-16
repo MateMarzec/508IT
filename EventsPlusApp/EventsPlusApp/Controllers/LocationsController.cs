@@ -23,6 +23,7 @@ namespace EventsPlusApp.Controllers
         // GET: Locations
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            //Sorting
             ViewData["NameSort"] = String.IsNullOrEmpty(sortOrder) ? "Name_Desc" : "";
             ViewData["MaximumNumberofParticipantsSort"] = sortOrder == "MaximumNumberofParticipants_Asc" ? "MaximumNumberofParticipants_Desc" : "MaximumNumberofParticipants_Asc";
             ViewData["PostCodeSort"] = sortOrder == "PostCode_Asc" ? "PostCode_Desc" : "PostCode_Asc";
@@ -77,7 +78,7 @@ namespace EventsPlusApp.Controllers
                     Locations = Locations.OrderBy(f => f.Name);
                     break;
             }
-            /*** Search Script ****/
+            //Searching
             ViewData["CurrentFilter"] = searchString;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -97,7 +98,7 @@ namespace EventsPlusApp.Controllers
             {
                 searchString = currentFilter;
             }
-
+            //Paging and return view
             int pageSize = 10;
             return View(await PaginatedList<Location>.CreateAsync(Locations.AsNoTracking(), pageNumber ?? 1, pageSize));
         }

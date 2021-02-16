@@ -16,14 +16,14 @@ namespace EventsPlusApp.Controllers
         {
             this.roleManager = roleManager;
         }
-
+        //GET : RoleControllers
         [Authorize(Policy = "writepolicy")]
         public IActionResult Index()
         {
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
-
+        //GET RoleControllers/Create
         [Authorize(Policy = "writepolicy")]
         public IActionResult Create()
         {

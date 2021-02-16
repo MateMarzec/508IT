@@ -27,6 +27,7 @@ namespace EventsPlusApp.Controllers
             var applicationDbContext = _context.Events.Include(l => l.Location).Include(l => l.Manager);
             return View(await applicationDbContext.ToListAsync());
         }
+        // Display events with participants
         [Authorize(Policy = "readpolicy")]
         public ViewResult Index(int? id)
         {

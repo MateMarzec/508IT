@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventsPlusApp
 {
+    // Paging class
     public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; private set; }

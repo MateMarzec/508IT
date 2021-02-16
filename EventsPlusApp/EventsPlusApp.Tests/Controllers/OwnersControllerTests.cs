@@ -31,11 +31,10 @@ namespace EventsPlusApp.Tests.Controllers
 
         private List<Owner> owners()
         {
-            return new List<Owner>
-        {
-          new Owner{ ID = 1, FirstName="TestName1", LastName="TestLName1", PhoneNumber="111111111"},
-          new Owner{ ID = 2, FirstName="TestName2", LastName="TestLName2", PhoneNumber="222222222"},
-               };
+            return new List<Owner>{
+                new Owner{ ID = 1, FirstName="TestName1", LastName="TestLName1", PhoneNumber="111111111"},
+                new Owner{ ID = 2, FirstName="TestName2", LastName="TestLName2", PhoneNumber="222222222"}
+            };
         }
 
         [Fact]

@@ -1,26 +1,31 @@
-﻿/* Provide sufficient contrast against white background */
-
+﻿html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+}
+body {
+    margin-bottom: 60px;
+    background-color: #393E46;
+}
+.text-green {
+    color: #0069D9 !important;
+}
 .lightfont{
     color: #EEEEEE !important;
 }
 td a {
     color: #EEEEEE !important;
 }
-
-
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #222831;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
-/* Navigation bar */
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -29,10 +34,6 @@ a.navbar-brand {
 .navbar {
     background-color: #EEEEEE !important;
 }
-.text-green {
-    color: #0069D9 !important;
-}
-/* Main */
 .boxDash {
     border: 2px solid #EEE;
     border-radius: 20px;
@@ -87,44 +88,21 @@ i.lightfont{
     width: 20px;
     height: 20px;
 }
-
 .dashboardBox {
     margin-top: 20px;
 }
-/* Footer */
-html {
-    font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
 }
-
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
-
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-/* Margin bottom by footer height */
-body {
-    margin-bottom: 60px;
-    background-color: #393E46;
 }
 .footer {
     position: absolute;
@@ -134,10 +112,16 @@ body {
     line-height: 60px;
     background-color: #EEEEEE !important;
 }
+/* Media Queries */
 @media (max-width: 767px) {
     .boxMiddle {
         width: 70%;
         height: 25%;
+    }
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
     }
 }
  

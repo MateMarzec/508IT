@@ -248,3 +248,4 @@ D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\bin\Debug\net5.0\Microso
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\RoleManagement\AddUserToRole.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\RoleManagement\Details.cshtml.g.cs
 D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\obj\Debug\net5.0\Razor\Views\RoleManagement\Index.cshtml.g.cs
+D:\UNI\Year 2\508\CW2\508IT\EventsPlusApp\EventsPlusApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll
